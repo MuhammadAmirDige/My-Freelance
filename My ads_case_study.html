@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0f0f0f;--ink2:#2e2e2e;--ink3:#6b6b6b;
+  --cream:#f9f8f5;--white:#fff;
+  --fb:#1877f2;--gg:#34a853;--tt:#000;
+  --line:rgba(0,0,0,0.09);
+  --gold:#b8935a;--gold-l:#d4ad7a;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* COVER */
+.cover{background:var(--ink);padding:64px 64px 56px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(0deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 1px,transparent 1px,transparent 60px)}
+.c-tag{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-l);margin-bottom:20px}
+.c-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:400;color:#fff;line-height:1.08;margin-bottom:10px}
+.c-title em{font-style:italic;color:var(--gold-l)}
+.c-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,0.45);margin-bottom:48px}
+.c-platforms{display:flex;gap:12px;margin-bottom:48px}
+.plat-badge{padding:7px 18px;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:0.08em}
+.plat-fb{background:var(--fb);color:#fff}
+.plat-gg{background:var(--gg);color:#fff}
+.plat-tt{background:#fff;color:#000}
+.c-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,0.1);padding-top:32px}
+.c-meta-item{padding-right:28px;border-right:1px solid rgba(255,255,255,0.08)}
+.c-meta-item:last-child{border-right:none}
+.c-meta-item:not(:first-child){padding-left:28px}
+.c-meta-l{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:4px}
+.c-meta-v{font-size:13px;color:rgba(255,255,255,0.78)}
+
+/* BODY */
+.wrap{max-width:820px;margin:0 auto;padding:0 48px}
+.sec{padding:56px 0;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:none}
+.ey{font-size:9px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;color:var(--ink);margin-bottom:18px;line-height:1.2}
+.h2 em{font-style:italic}
+.bd{font-size:15px;line-height:1.9;color:var(--ink2);font-weight:300;margin-bottom:14px}
+.bd:last-child{margin-bottom:0}
+
+/* PLATFORM CARDS */
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.plat-card{background:var(--white);border:1px solid var(--line);border-top:3px solid;overflow:hidden}
+.plat-card.fb{border-top-color:var(--fb)}
+.plat-card.gg{border-top-color:var(--gg)}
+.plat-card.tt{border-top-color:#000}
+.plat-head{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.plat-name{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.plat-spent{font-family:'Playfair Display',serif;font-size:26px;font-weight:400;color:var(--ink)}
+.plat-spent-l{font-size:11px;color:var(--ink3);font-weight:300;margin-top:2px}
+.plat-rows{padding:14px 20px;display:flex;flex-direction:column;gap:10px}
+.plat-row{display:flex;justify-content:space-between;align-items:center}
+.plat-row-l{font-size:12px;color:var(--ink3);font-weight:300}
+.plat-row-v{font-size:13px;font-weight:500;color:var(--ink)}
+.highlight-v{color:var(--gg);font-weight:500}
+
+/* COMBINED STATS */
+.big-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.big-stat{background:var(--white);border:1px solid var(--line);padding:28px 20px;text-align:center}
+.big-n{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:var(--ink);line-height:1}
+.big-u{font-family:'Playfair Display',serif;font-size:20px;color:var(--ink3)}
+.big-l{font-size:11px;font-weight:300;color:var(--ink3);margin-top:8px;line-height:1.5}
+
+/* INSIGHT CARDS */
+.insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.ins{background:var(--white);border:1px solid var(--line);padding:24px}
+.ins-tag{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ins-title{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px}
+.ins-desc{font-size:13px;line-height:1.75;color:var(--ink3);font-weight:300}
+
+/* WINNER BAR */
+.winner-table{margin-top:36px;border:1px solid var(--line);overflow:hidden}
+.wt-head{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:var(--ink);padding:12px 20px;gap:12px}
+.wt-hcell{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-align:right}
+.wt-hcell:first-child{text-align:left}
+.wt-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:14px 20px;gap:12px;border-bottom:1px solid var(--line);background:var(--white);align-items:center}
+.wt-row:last-child{border-bottom:none}
+.wt-row.best{background:#f6fdf6}
+.wt-cell{font-size:13px;color:var(--ink2);text-align:right}
+.wt-cell:first-child{text-align:left;font-weight:500;color:var(--ink)}
+.wt-cell.green{color:var(--gg);font-weight:500}
+.wt-badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:10px;font-weight:500;margin-left:6px}
+.badge-fb{background:#e8f0fe;color:var(--fb)}
+.badge-gg{background:#e6f4ea;color:var(--gg)}
+.badge-tt{background:#f3f3f3;color:#000}
+.badge-win{background:#fff3cd;color:#856404;font-size:9px;padding:2px 6px}
+
+/* LEARNING */
+.learn-list{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+.lrn{display:flex;gap:16px;padding:20px;background:var(--white);border:1px solid var(--line)}
+.lrn-icon{width:28px;height:28px;background:var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#fff;flex-shrink:0;margin-top:1px}
+.lrn-text{font-size:13px;line-height:1.8;color:var(--ink2);font-weight:300}
+
+/* CTA */
+.cta{background:var(--ink);padding:64px;text-align:center}
+.cta-ey{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-l);margin-bottom:14px}
+.cta-h{font-family:'Playfair Display',serif;font-size:36px;font-weight:400;color:#fff;margin-bottom:10px}
+.cta-h em{font-style:italic;color:var(--gold-l)}
+.cta-p{font-size:13px;font-weight:300;color:rgba(255,255,255,0.4);margin-bottom:32px}
+.cta-btn{border:1px solid var(--gold);color:var(--gold);font-size:9px;letter-spacing:0.22em;text-transform:uppercase;padding:13px 40px;font-family:'DM Sans',sans-serif;cursor:pointer;background:transparent}
+
+.ornament{text-align:center;padding:20px 0;color:var(--gold-l);letter-spacing:10px;font-size:13px}
+
+@media(max-width:620px){
+  .cover{padding:36px 24px 40px}
+  .c-title{font-size:36px}
+  .c-meta{grid-template-columns:1fr 1fr;gap:16px}
+  .c-meta-item{border-right:none;padding:0}
+  .wrap{padding:0 24px}
+  .plat-grid,.big-stats,.insight-grid{grid-template-columns:1fr}
+  .wt-head,.wt-row{grid-template-columns:1.5fr 1fr 1fr;font-size:11px}
+  .wt-hcell:nth-child(4),.wt-hcell:nth-child(5),.wt-cell:nth-child(4),.wt-cell:nth-child(5){display:none}
+  .cta{padding:48px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="c-tag">Case Study · Paid Media · Multi-Platform</div>
+  <h1 class="c-title">3 Platforms.<br><em>One Strategy.</em></h1>
+  <p class="c-sub">A cross-platform paid advertising campaign — Facebook, Google & TikTok — May 2024</p>
+  <div class="c-platforms">
+    <div class="plat-badge plat-fb">Facebook Ads</div>
+    <div class="plat-badge plat-gg">Google Ads</div>
+    <div class="plat-badge plat-tt">TikTok Ads</div>
+  </div>
+  <div class="c-meta">
+    <div class="c-meta-item">
+      <div class="c-meta-l">Campaign Period</div>
+      <div class="c-meta-v">May 1 – 31, 2024</div>
+    </div>
+    <div class="c-meta-item">
+      <div class="c-meta-l">Total Ad Spend</div>
+      <div class="c-meta-v">$8,934.13</div>
+    </div>
+    <div class="c-meta-item">
+      <div class="c-meta-l">Total Conversions</div>
+      <div class="c-meta-v">3,602</div>
+    </div>
+    <div class="c-meta-item">
+      <div class="c-meta-l">Blended CPA</div>
+      <div class="c-meta-v">$2.48</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="sec">
+  <div class="ey">Overview</div>
+  <h2 class="h2">The <em>Campaign</em></h2>
+  <p class="bd">This was a full-funnel paid media campaign running simultaneously across three platforms — Meta (Facebook), Google Ads, and TikTok Ads Manager — over a 31-day period in May 2024. The objective was to drive direct sales conversions at the lowest possible cost per acquisition, while testing which platform delivered the strongest ROI for the client's audience.</p>
+  <p class="bd">Each platform was assigned a distinct role in the funnel: TikTok for top-of-funnel discovery, Google for high-intent search capture, and Facebook for retargeting and lookalike audience conversion. The combined spend of $8,934 generated 3,602 total conversions at a blended CPA of $2.48.</p>
+</div>
+
+<div class="sec">
+  <div class="ey">Platform Breakdown</div>
+  <h2 class="h2">Results by <em>Channel</em></h2>
+  <div class="plat-grid">
+    <div class="plat-card fb">
+      <div class="plat-head">
+        <div class="plat-name">Facebook · Meta Ads</div>
+        <div class="plat-spent">$3,055.68</div>
+        <div class="plat-spent-l">Total Spend</div>
+      </div>
+      <div class="plat-rows">
+        <div class="plat-row"><span class="plat-row-l">Purchases</span><span class="plat-row-v">1,248</span></div>
+        <div class="plat-row"><span class="plat-row-l">Reach</span><span class="plat-row-v">235,742</span></div>
+        <div class="plat-row"><span class="plat-row-l">Impressions</span><span class="plat-row-v">589,112</span></div>
+        <div class="plat-row"><span class="plat-row-l">Cost per Purchase</span><span class="plat-row-v highlight-v">$2.45</span></div>
+        <div class="plat-row"><span class="plat-row-l">Campaigns Active</span><span class="plat-row-v">3</span></div>
+      </div>
+    </div>
+    <div class="plat-card gg">
+      <div class="plat-head">
+        <div class="plat-name">Google Ads</div>
+        <div class="plat-spent">$3,020.00</div>
+        <div class="plat-spent-l">Total Spend (est.)</div>
+      </div>
+      <div class="plat-rows">
+        <div class="plat-row"><span class="plat-row-l">Conversions</span><span class="plat-row-v">1,280</span></div>
+        <div class="plat-row"><span class="plat-row-l">Total Clicks</span><span class="plat-row-v">14,600</span></div>
+        <div class="plat-row"><span class="plat-row-l">Cost/Conv.</span><span class="plat-row-v highlight-v">$2.36</span></div>
+        <div class="plat-row"><span class="plat-row-l">Top Campaign</span><span class="plat-row-v">Summer Sale Search</span></div>
+        <div class="plat-row"><span class="plat-row-l">Campaigns Active</span><span class="plat-row-v">4</span></div>
+      </div>
+    </div>
+    <div class="plat-card tt">
+      <div class="plat-head">
+        <div class="plat-name">TikTok Ads Manager</div>
+        <div class="plat-spent">$2,876.45</div>
+        <div class="plat-spent-l">Total Spend</div>
+      </div>
+      <div class="plat-rows">
+        <div class="plat-row"><span class="plat-row-l">Conversions</span><span class="plat-row-v">1,154</span></div>
+        <div class="plat-row"><span class="plat-row-l">Clicks (Destination)</span><span class="plat-row-v">18,645</span></div>
+        <div class="plat-row"><span class="plat-row-l">CTR</span><span class="plat-row-v">1.83%</span></div>
+        <div class="plat-row"><span class="plat-row-l">CPA</span><span class="plat-row-v highlight-v">$2.49</span></div>
+        <div class="plat-row"><span class="plat-row-l">Top Demo</span><span class="plat-row-v">18–34, Male</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="ey">Combined Performance</div>
+  <h2 class="h2">Total <em>Numbers</em></h2>
+  <div class="big-stats">
+    <div class="big-stat">
+      <div class="big-n">$8,934<span class="big-u"></span></div>
+      <div class="big-l">Total Ad Spend<br>Across All Platforms</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-n">3,602<span class="big-u"></span></div>
+      <div class="big-l">Total Conversions<br>FB + Google + TikTok</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-n">$2<span class="big-u">.48</span></div>
+      <div class="big-l">Blended CPA<br>All Channels Combined</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-n">839<span class="big-u">K</span></div>
+      <div class="big-l">Total Impressions<br>Across All Platforms</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="ey">Platform Comparison</div>
+  <h2 class="h2">Which Channel <em>Won?</em></h2>
+  <div class="winner-table">
+    <div class="wt-head">
+      <div class="wt-hcell" style="text-align:left">Platform</div>
+      <div class="wt-hcell">Spend</div>
+      <div class="wt-hcell">Conversions</div>
+      <div class="wt-hcell">CPA</div>
+      <div class="wt-hcell">Efficiency</div>
+    </div>
+    <div class="wt-row best">
+      <div class="wt-cell">Google Ads <span class="wt-badge badge-win">★ Best CPA</span></div>
+      <div class="wt-cell">$3,020</div>
+      <div class="wt-cell">1,280</div>
+      <div class="wt-cell green">$2.36</div>
+      <div class="wt-cell green">Highest</div>
+    </div>
+    <div class="wt-row">
+      <div class="wt-cell">Facebook Ads <span class="wt-badge badge-fb">Meta</span></div>
+      <div class="wt-cell">$3,055</div>
+      <div class="wt-cell">1,248</div>
+      <div class="wt-cell">$2.45</div>
+      <div class="wt-cell">Strong</div>
+    </div>
+    <div class="wt-row">
+      <div class="wt-cell">TikTok Ads <span class="wt-badge badge-tt">TikTok</span></div>
+      <div class="wt-cell">$2,876</div>
+      <div class="wt-cell">1,154</div>
+      <div class="wt-cell">$2.49</div>
+      <div class="wt-cell">Good</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="ey">Strategy & Insights</div>
+  <h2 class="h2">What the Numbers <em>Mean</em></h2>
+  <div class="insight-grid">
+    <div class="ins">
+      <div class="ins-tag">Google Ads</div>
+      <div class="ins-title">Search Intent Wins on CPA</div>
+      <div class="ins-desc">Google delivered the lowest CPA at $2.36 — confirming that capturing high-intent search traffic converts more efficiently than interruption-based ads. Summer Sale Search Campaign alone drove 782 conversions.</div>
+    </div>
+    <div class="ins">
+      <div class="ins-tag">Facebook Ads</div>
+      <div class="ins-title">Lookalike + Retargeting Power</div>
+      <div class="ins-desc">Facebook's 3-campaign structure (Conversion, Website Visitors, Lookalike Purchasers) maintained consistent CPA at $2.45 while reaching 235K unique people — the strongest reach of all three platforms.</div>
+    </div>
+    <div class="ins">
+      <div class="ins-tag">TikTok Ads</div>
+      <div class="ins-title">Discovery at Scale</div>
+      <div class="ins-desc">TikTok delivered 18,645 destination clicks at 1.83% CTR — strong for a discovery platform. The 18–34 male demographic dominated, indicating a clear audience signal for future creative targeting.</div>
+    </div>
+    <div class="ins">
+      <div class="ins-tag">Cross-Platform</div>
+      <div class="ins-title">Budget Allocation Worked</div>
+      <div class="ins-desc">All three platforms stayed within $0.13 of each other on CPA ($2.36–$2.49) — a sign of well-calibrated budget distribution. No single platform was over-funded or starved of budget to perform.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="ey">Key Takeaways</div>
+  <h2 class="h2">What I <em>Learned</em></h2>
+  <div class="learn-list">
+    <div class="lrn">
+      <div class="lrn-icon">1</div>
+      <div class="lrn-text">A $2.48 blended CPA across three platforms in a 31-day period is a strong result — but the real win is the consistency. When all three channels converge on similar CPAs, it means the audience targeting, creative, and landing pages are aligned across the full funnel.</div>
+    </div>
+    <div class="lrn">
+      <div class="lrn-icon">2</div>
+      <div class="lrn-text">Google's lowest CPA confirms a fundamental rule: intent-based traffic always outperforms cold audience interruption when the objective is direct conversion. For future campaigns, shifting 10–15% more budget to Google Search would likely improve overall blended CPA.</div>
+    </div>
+    <div class="lrn">
+      <div class="lrn-icon">3</div>
+      <div class="lrn-text">TikTok's demographic data (18–34, male-skewed) is the most valuable output of this campaign — not the conversions. This audience signal should directly inform the creative strategy and product positioning for the next campaign cycle.</div>
+    </div>
+    <div class="lrn">
+      <div class="lrn-icon">4</div>
+      <div class="lrn-text">Running all three platforms simultaneously creates attribution overlap — a visitor touched by TikTok, retargeted on Facebook, and converted through Google will be counted as a conversion on all three. Understanding this is critical for honest ROI reporting to clients.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="ornament">· · ✦ · ·</div>
+
+<div class="cta">
+  <div class="cta-ey">Let's Talk Results</div>
+  <div class="cta-h">Ready to scale your<br><em>paid media?</em></div>
+  <div class="cta-p">I run multi-platform ad campaigns built around data, not guesswork.</div>
+  <button class="cta-btn" onclick="sendPrompt('میں Muhammad Amir سے paid media campaign کے لیے contact کرنا چاہتا ہوں')">Start a Campaign</button>
+</div>
+
+</body>
+</html>
