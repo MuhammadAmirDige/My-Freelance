@@ -3091,13 +3091,15 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
   e.preventDefault();
   let valid = true;
 
-  const name = document.getElementById('name');
-  const email = document.getElementById('email');
+  const name    = document.getElementById('name');
+  const email   = document.getElementById('email');
+  const service = document.getElementById('service');
+  const budget  = document.getElementById('budget');
   const message = document.getElementById('message');
 
-  const fgName = document.getElementById('fg-name');
+  const fgName  = document.getElementById('fg-name');
   const fgEmail = document.getElementById('fg-email');
-  const fgMsg = document.getElementById('fg-message');
+  const fgMsg   = document.getElementById('fg-message');
 
   fgName.classList.remove('error');
   fgEmail.classList.remove('error');
@@ -3111,13 +3113,31 @@ document.getElementById('contact-form').addEventListener('submit', function(e) {
     const btn = this.querySelector('button[type="submit"]');
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => {
+
+    /* ── Google Form میں data بھیجیں ── */
+    const GOOGLE_FORM_ID = '1FAIpQLSf8VA9aYhu6Ya6T6fqW82516NuqUiPswwiqfWi5BlQaj6pl1A';
+    const formData = new FormData();
+    formData.append('entry.2067470879', name.value.trim());
+    formData.append('entry.155069545',  email.value.trim());
+    formData.append('entry.1018632639', service.value || 'Not Selected');
+    formData.append('entry.158293198',  budget.value  || 'Not Selected');
+    formData.append('entry.569358324',  message.value.trim());
+
+    /* fetch کے ذریعے Google Form کو submit کریں */
+    fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).finally(() => {
+      /* چاہے response آئے یا نہ آئے — success دکھائیں */
       document.getElementById('form-success').style.display = 'block';
       this.reset();
-      btn.textContent = 'Send Message →';
+      btn.innerHTML = '<span>Send Message</span><span>→</span>';
       btn.disabled = false;
-      setTimeout(() => document.getElementById('form-success').style.display = 'none', 5000);
-    }, 1200);
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'none';
+      }, 6000);
+    });
   }
 });
 
